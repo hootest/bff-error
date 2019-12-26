@@ -2,6 +2,7 @@ import { HttpError } from "routing-controllers";
 import { HttpJson } from "./HttpJson";
 import { RetCodeEnum } from "./RetCodeEnum";
 import * as protobuf from 'protobufjs';
+import { resolve } from 'path';
 
 function getErrMessage(retMsg: any) {
     let errMessage: string;
@@ -49,7 +50,7 @@ export class PageError extends HttpError {
 
             if (retMsg.metadata && retMsg.metadata._internal_repr && retMsg.metadata._internal_repr["grpc-status-details-bin"] && retMsg.metadata._internal_repr["grpc-status-details-bin"].length) {
                 try {
-                    const root = protobuf.loadSync('./ErrorInfo.proto');
+                    const root = protobuf.loadSync(resolve(__dirname, 'ErrorInfo.proto'));
                     const ErrorInfo = root.lookupType("error.ErrorInfo");
                     const ErrorDetail = root.lookupType("error.ErrorDetail");
 

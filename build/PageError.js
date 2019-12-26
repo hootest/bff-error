@@ -5,6 +5,7 @@ const HttpJson_1 = require("./HttpJson");
 const RetCodeEnum_1 = require("./RetCodeEnum");
 exports.RetCodeEnum = RetCodeEnum_1.RetCodeEnum;
 const protobuf = require("protobufjs");
+const path_1 = require("path");
 function getErrMessage(retMsg) {
     let errMessage;
     if (typeof retMsg === "object") {
@@ -43,7 +44,7 @@ class PageError extends routing_controllers_1.HttpError {
             }
             if (retMsg.metadata && retMsg.metadata._internal_repr && retMsg.metadata._internal_repr["grpc-status-details-bin"] && retMsg.metadata._internal_repr["grpc-status-details-bin"].length) {
                 try {
-                    const root = protobuf.loadSync('./ErrorInfo.proto');
+                    const root = protobuf.loadSync(path_1.resolve(__dirname, 'ErrorInfo.proto'));
                     const ErrorInfo = root.lookupType("error.ErrorInfo");
                     const ErrorDetail = root.lookupType("error.ErrorDetail");
                     const buffer = retMsg.metadata._internal_repr["grpc-status-details-bin"][0];
