@@ -1,6 +1,6 @@
 {
   "name": "@hootest/bff-error",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "index.js",
   "repository": "git@https://github.com/hootest/bff-error.git",
   "author": "",
@@ -8,7 +8,7 @@
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "gts clean",
-    "compile": "tsc -p ."
+    "compile": "tsc -p . && node bin/copy.js"
   },
   "devDependencies": {
     "@types/protobufjs": "^6.0.0",

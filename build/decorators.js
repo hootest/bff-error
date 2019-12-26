@@ -1,31 +1,43 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const PageError_1 = require("./PageError");
-function ServiceCache() {
+function ServiceCatch() {
     return (target, key, descriptor) => {
         const fn = descriptor.value;
         descriptor.value = function (...args) {
-            try {
-                return fn.apply(this, args);
-            }
-            catch (err) {
-                throw new PageError_1.PageError(PageError_1.RetCodeEnum.INTERFACE_CALL_ERROR, err);
-            }
+            return __awaiter(this, void 0, void 0, function* () {
+                try {
+                    return yield fn.apply(this, args);
+                }
+                catch (err) {
+                    throw new PageError_1.PageError(PageError_1.RetCodeEnum.INTERFACE_CALL_ERROR, err);
+                }
+            });
         };
     };
 }
-exports.ServiceCache = ServiceCache;
-function ControllerCache() {
+exports.ServiceCatch = ServiceCatch;
+function ControllerCatch() {
     return (target, key, descriptor) => {
         const fn = descriptor.value;
         descriptor.value = function (...args) {
-            try {
-                return fn.apply(this, args);
-            }
-            catch (err) {
-                throw PageError_1.ControlError(err, `${key} 调用失败`);
-            }
+            return __awaiter(this, void 0, void 0, function* () {
+                try {
+                    return yield fn.apply(this, args);
+                }
+                catch (err) {
+                    throw PageError_1.ControlError(err, `${key} 调用失败`);
+                }
+            });
         };
     };
 }
-exports.ControllerCache = ControllerCache;
+exports.ControllerCatch = ControllerCatch;
