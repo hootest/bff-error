@@ -1,0 +1,22 @@
+{
+  "name": "bff-error",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@git.myscrm.cn:trade/bff-error.git",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "gts clean",
+    "compile": "tsc -p ."
+  },
+  "devDependencies": {
+    "@types/protobufjs": "^6.0.0",
+    "gts": "^1.0.0",
+    "ts-node": "^7.0.1",
+    "typescript": "~3.4.0"
+  },
+  "dependencies": {
+    "routing-controllers": "^0.7.7"
+  }
+}
