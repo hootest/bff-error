@@ -1,9 +1,10 @@
 {
   "name": "@hootest/bff-error",
   "version": "0.0.1",
-  "main": "index.js",
   "repository": "git@https://github.com/hootest/bff-error.git",
-  "author": "",
+  "author": "sai <hoosai@163.com>",
+  "main": "build/index.js",
+  "typings": "build/index.d.ts",
   "license": "MIT",
   "scripts": {
     "build": "npm run clean && npm run compile",
