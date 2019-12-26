@@ -1,8 +1,8 @@
 {
-  "name": "bff-error",
+  "name": "@hootest/bff-error",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "git@git.myscrm.cn:trade/bff-error.git",
+  "repository": "git@https://github.com/hootest/bff-error.git",
   "author": "",
   "license": "MIT",
   "scripts": {
