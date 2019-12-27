@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const PageError_1 = require("./PageError");
+const HttpJson_1 = require("./HttpJson");
 function ServiceCatch() {
     return (target, key, descriptor) => {
         const fn = descriptor.value;
@@ -31,7 +32,8 @@ function ControllerCatch() {
         descriptor.value = function (...args) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
-                    return yield fn.apply(this, args);
+                    const result = yield fn.apply(this, args);
+                    return new HttpJson_1.HttpJson(result);
                 }
                 catch (err) {
                     throw PageError_1.ControlError(err, `${key} 调用失败`);
