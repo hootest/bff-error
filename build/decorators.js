@@ -26,14 +26,14 @@ function ServiceCatch() {
     };
 }
 exports.ServiceCatch = ServiceCatch;
-function ControllerCatch() {
+function ControllerCatch(returnHttpJson = true) {
     return (target, key, descriptor) => {
         const fn = descriptor.value;
         descriptor.value = function (...args) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
                     const result = yield fn.apply(this, args);
-                    return new HttpJson_1.HttpJson(result);
+                    return returnHttpJson ? new HttpJson_1.HttpJson(result) : result;
                 }
                 catch (err) {
                     throw PageError_1.ControlError(err, `${key} 调用失败`);
